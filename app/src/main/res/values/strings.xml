@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="button_ok">OK</string>
+    <string name="et_1diag">City Name</string>
+    <string name="et_2diag">Country Name</string>
+    <string name="the_temperature_in_london_uk_is">The Temperature in London, UK is</string>
+</resources>
