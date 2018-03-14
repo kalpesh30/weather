@@ -1,6 +1,7 @@
 package com.kalpeshgupta.weather;
 
 import android.os.AsyncTask;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tv1,tv2;
     private String temperature;
     private EditText et1,et2;
+    private SwipeRefreshLayout slayout;
 
     /*@Override
     public boolean OnCreateOptionsMenu(Menu menu){
@@ -44,7 +46,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         tv1 = findViewById(R.id.kelvin);
         tv2 = findViewById(R.id.celcius);
-
+        slayout = findViewById(R.id.swipe1) ;
+        slayout.setColorSchemeResources(R.color.colorAccent);
+       slayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new GetTemperature().execute(et1.getText().toString(), et2.getText().toString());
+                slayout.setRefreshing(false);
+            }
+        });
         /*MenuItem pop = new Menu();
         pop.getItem(R.menu.menu1);
         onOptionsItemSelected(pop.getItem(R.id.it1));*/
@@ -90,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
         });
         dialog.show();
     }
+
+
     private class GetTemperature extends AsyncTask<String, String, Void> {
         @Override
         protected void onPreExecute() {
